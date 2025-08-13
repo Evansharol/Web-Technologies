@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Top Travel Destinations</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+    color: #222;
+  }
+  header {
+    background-color: #009688;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  h1 { margin: 0; }
+  #music-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5em;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  #music-btn:hover { background: rgba(255,255,255,0.4); }
+
+  main {
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+  }
+  section { margin-bottom: 30px; }
+  h2 { color: #004aad; margin-top: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  th { background: #009688; }
+
+  /* Shared row layout */
+  .side-by-side {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2em;
+  }
+  /* Generic box style */
+  .box {
+    flex: 1 1 48%;
+    border: 2px solid #004aad;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  /* Slider */
+  .slider-container {
+    position: relative;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider-container img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  #next-img-btn {
+    position: absolute;
+    right: 10px;
+    background-color: #004aad;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 1.2em;
+    user-select: none;
+  }
+  /* Drag & Drop */
+  .draggable-img {
+    width: 120px;
+    border-radius: 4px;
+    cursor: grab;
+    border: 2px dashed #004aad;
+    padding: 2px;
+  }
+  .drag-area {
+    border: 2px dashed #004aad;
+    padding: 20px;
+    text-align: center;
+    color: #004aad;
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+  /* Form and inspiration video boxes */
+  .form-box, .inspiration-box {
+    flex: 1 1 48%;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 20px;
+  }
+  .form-box { background: #fff; }
+  .inspiration-box { background: #e6f0ff; text-align: center; }
+  form {
+    display: grid;
+    gap: 15px;
+  }
+  input, select, button {
+    padding: 8px;
+    font-size: 1em;
+  }
+  button {
+    background-color: #004aad;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover { background-color: #0066ff; }
+  .media-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  video, iframe {
+    border: none;
+    border-radius: 5px;
+  }
+  footer {
+    background-color: #009688;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🌏 My Top Travel Destinations</h1>
+  <div id="music-btn" title="Play/Pause Music">🎵</div>
+  <audio id="bg-music" loop>
+    <source src="song.mp3" type="audio/mp3">
+  </audio>
+</header>
+
+<main>
+
+  <!-- Lists -->
+  <section>
+    <h2>🏆 Top 5 Destinations</h2>
+    <ol>
+      <li>Kyoto, Japan</li>
+      <li>Paris, France</li>
+      <li>Banff National Park, Canada</li>
+      <li>Cape Town, South Africa</li>
+      <li>Santorini, Greece</li>
+    </ol>
+    <h3>What I'd Love To Do:</h3>
+    <ul>
+      <li>Kyoto: Visit ancient temples, relax in onsen, enjoy cherry blossoms</li>
+      <li>Paris: See the Eiffel Tower sparkle, taste fresh croissants, visit museums</li>
+      <li>Banff: Hike scenic trails, canoe in turquoise lakes, photograph wildlife</li>
+      <li>Cape Town: Explore Table Mountain, relax at beaches, visit Robben Island</li>
+      <li>Santorini: Watch sunsets in Oia, swim in blue waters, sample Greek cuisine</li>
+    </ul>
+  </section>
+
+  <!-- Table -->
+  <section>
+    <h2>✨ Destination Comparison</h2>
+    <table>
+      <tr>
+        <th>Place</th>
+        <th>Best Time to Visit</th>
+        <th>Budget</th>
+        <th>Rating</th>
+      </tr>
+      <tr>
+        <td>Kyoto</td>
+        <td>March–May, October–November</td>
+        <td>20K</td>
+        <td>9.5/10</td>
+      </tr>
+      <tr>
+        <td>Santorini</td>
+        <td>May–September</td>
+        <td>20K</td>
+        <td>9/10</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Stunning Images + Drag & Drop side-by-side -->
+  <section class="side-by-side">
+     <h2> Travel Images </h2>
+      <div class="box" style="display: flex; gap: 30px; justify-content: center; align-items: center; background: #e6f7ff; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+        <div class="box" style="padding: 12px; width: 260px; min-width: 180px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <img src="taj.jpeg" alt="Taj Mahal" style="width:100%; height:180px; object-fit:cover; border-radius:8px; border: 2px solid #004aad;">
+        </div>
+        <div class="box" style="padding: 12px; width: 260px; min-width: 180px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <img src="img2.jpg" alt="India Gate" style="width:100%; height:180px; object-fit:cover; border-radius:8px; border: 2px solid #004aad;">
+        </div>
+        <div class="box" style="padding: 12px; width: 260px; min-width: 180px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <img src="img3.jpg" alt="Eiffel Tower" style="width:100%; height:180px; object-fit:cover; border-radius:8px; border: 2px solid #004aad;">
+        </div>
+      </div>
+    <div class="box">
+      <h2>🖱️ Drag & Drop Your Dream Destination</h2>
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <img src="taj.jpeg" class="draggable-img" draggable="true" alt="India Gate">
+        <img src="img2.jpg" class="draggable-img" draggable="true" alt="Eiffel Tower">
+        <img src="img3.jpg" class="draggable-img" draggable="true" alt="Taj Mahal">
+      </div>
+      <div class="drag-area">Drop your favorite destination image here!</div>
+    </div>
+  </section>
+
+  <!-- Form + Inspiration Video side-by-side -->
+  <section class="side-by-side">
+    <div class="form-box">
+      <h2>📅 Plan Your Dream Trip</h2>
+      <form>
+        <div>
+          <label for="season">Preferred Travel Season:</label>
+          <select id="season" name="season">
+            <option>Spring</option>
+            <option>Summer</option>
+            <option>Autumn</option>
+            <option>Winter</option>
+          </select>
+        </div>
+        <div>
+          <label for="trip-date">Planned Trip Date:</label>
+          <input type="date" id="trip-date" name="trip-date">
+        </div>
+        <div>
+          <label for="budget">Budget Preference ($500–$5000):</label>
+          <input type="range" id="budget" name="budget" min="500" max="5000" step="100" value="2500">
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="inspiration-box">
+      <h2>🎥 Travel Inspiration</h2>
+      <div class="media-section">
+        <div>
+          <video width="300" controls 
+                 poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div>
+          <iframe width="300" height="180" src="https://www.youtube.com/embed/Scxs7L0vhZ4" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Evanglin Sharol S, August 2025
+</footer>
+
+<script>
+// Music toggle
+const musicBtn = document.getElementById('music-btn');
+const bgMusic = document.getElementById('bg-music');
+musicBtn.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicBtn.textContent = '⏸️';
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = '🎵';
+  }
+});
+
+</script>
+</body>
+</html>
+
+
