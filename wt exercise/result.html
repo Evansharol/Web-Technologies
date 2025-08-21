@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Prediction Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #111111, #440000, #111111);
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      background: rgba(0, 0, 0, 0.85);
+      width: 80%;
+      max-width: 1000px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(255,0,0,0.4);
+    }
+
+    .image-section {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1a1a1a;
+      padding: 20px;
+    }
+
+    .image-section img {
+      max-width: 300px;
+    }
+
+    .details-section {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .details-section h2 {
+      color: #ff4444;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .details-section p {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Gender Image -->
+    <div class="image-section">
+      <img id="genderImage" src="" alt="User Gender">
+    </div>
+
+    <!-- User Details -->
+    <div class="details-section">
+      <h2>User Details</h2>
+      <p><strong>Name:</strong> <span id="resName"></span></p>
+      <p><strong>Year of Birth:</strong> <span id="resBirth"></span></p>
+      <p><strong>Foods:</strong> <span id="resFoods"></span></p>
+      <p><strong>Favorite Food:</strong> <span id="resFavFood"></span></p>
+      <p><strong>Lifestyle:</strong> <span id="resLifestyle"></span></p>
+      <p><strong>Gender:</strong> <span id="resGender"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("lifeData"));
+
+    if (data) {
+      document.getElementById("resName").textContent = data.name;
+      document.getElementById("resBirth").textContent = data.birthyear;
+      document.getElementById("resFoods").textContent = data.foods;
+      document.getElementById("resFavFood").textContent = data.favFood;
+      document.getElementById("resLifestyle").textContent = data.lifestyle;
+      document.getElementById("resGender").textContent = data.gender;
+
+      // Set gender image
+      const img = document.getElementById("genderImage");
+      if (data.gender === "Male") {
+        img.src = "images/man.png"; // standing male
+      } else if (data.gender === "Female") {
+        img.src = "images/female.png"; // standing female
+      } else {
+        img.src = "https://cdn-icons-png.flaticon.com/512/1077/1077114.png"; // default
+      }
+    }
+  </script>
+
+</body>
+</html>

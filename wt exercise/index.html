@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Days Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #111111, #440000, #111111);
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      background: rgba(0, 0, 0, 0.85);
+      width: 75%;
+      max-width: 950px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(255,0,0,0.4);
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .form-section h2 {
+      margin-bottom: 10px;
+      color: #ff4444;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .warning-text {
+      text-align: center;
+      font-size: 14px;
+      font-style: italic;
+      color: #bbb;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #ff9999;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ff4444;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .form-group input::placeholder {
+      color: #888;
+    }
+
+    .submit-btn {
+      background: #ff0000;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+      width: 100%;
+      transition: 0.3s;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .submit-btn:hover {
+      background: #cc0000;
+      box-shadow: 0 0 12px rgba(255,0,0,0.6);
+    }
+
+    .image-section {
+      flex: 1;
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .gender-option {
+      text-align: center;
+    }
+
+    .gender-option input {
+      display: none;
+    }
+
+    .gender-option label {
+      cursor: pointer;
+      display: block;
+    }
+
+    .gender-option img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      transition: 0.3s;
+      background: #000;
+      padding: 5px;
+    }
+
+    .gender-option input:checked + img {
+      border-color: #ff0000;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(255,0,0,0.6);
+    }
+
+    .gender-option span {
+      display: block;
+      margin-top: 8px;
+      font-weight: bold;
+      color: #ff6666;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left Form Section -->
+    <div class="form-section">
+      <h2>⚠️ Life Days Predictor ⚠️</h2>
+      <p class="warning-text">
+        Enter your details carefully... The foods you eat and the year you were born 
+        may decide how many days remain in your journey.
+      </p>
+
+      <form id="lifeForm">
+        <div class="form-group">
+          <label for="name">Your Name:</label>
+          <input type="text" id="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="birthyear">Year of Birth:</label>
+          <input type="number" id="birthyear" placeholder="e.g., 1998" required>
+        </div>
+
+        <div class="form-group">
+          <label for="foods">Foods You Eat Regularly:</label>
+          <input type="text" id="foods" placeholder="Pizza, Salad, Rice, etc.">
+        </div>
+
+        <div class="form-group">
+          <label for="fav-food">Your Favorite Food:</label>
+          <input type="text" id="fav-food" placeholder="Type your favorite food">
+        </div>
+
+        <div class="form-group">
+          <label for="lifestyle">Lifestyle:</label>
+          <select id="lifestyle">
+            <option value="">--Select--</option>
+            <option value="active">Active</option>
+            <option value="moderate">Moderate</option>
+            <option value="sedentary">Sedentary</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Predict My Life Days</button>
+      </form>
+    </div>
+
+    <!-- Right Image Section -->
+    <div class="image-section">
+      <div class="gender-option">
+        <label>
+          <input type="radio" name="gender" value="Male">
+          <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Male">
+          <span>Male</span>
+        </label>
+      </div>
+
+      <div class="gender-option">
+        <label>
+          <input type="radio" name="gender" value="Female">
+          <img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" alt="Female">
+          <span>Female</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("lifeForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Collect data
+      const userData = {
+        name: document.getElementById("name").value,
+        birthyear: document.getElementById("birthyear").value,
+        foods: document.getElementById("foods").value,
+        favFood: document.getElementById("fav-food").value,
+        lifestyle: document.getElementById("lifestyle").value,
+        gender: document.querySelector('input[name="gender"]:checked')?.value || "Not Selected"
+      };
+
+      // Save to localStorage
+      localStorage.setItem("lifeData", JSON.stringify(userData));
+
+      // Redirect to result page
+      window.location.href = "result.html";
+    });
+  </script>
+</body>
+</html>
