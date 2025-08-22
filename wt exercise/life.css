@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #111111, #440000, #111111);
+  color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.85);
+  width: 85%;
+  max-width: 1100px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(255,0,0,0.4);
+  padding: 20px;
+}
+
+.top-section {
+  display: flex;
+  width: 100%;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1a1a1a;
+  padding: 20px;
+}
+
+.image-section img {
+  max-width: 250px;
+}
+
+.details-section {
+  flex: 1;
+  padding: 30px;
+}
+
+.details-section h2 {
+  color: #ff4444;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.details-section p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #ddd;
+}
+
+.life-section {
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn {
+  padding: 12px 20px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #cc0000;
+}
+
+.line {
+  height: 4px;
+  background: #fff;
+  border-radius: 2px;
+  transition: width 1s ease;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  min-width: 20px;
+  max-width: 664px;
+  z-index: 1;
+}
+
+.life-visual {
+  position: relative;
+  width: 814px;
+  height: 194px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#lifePerson {
+  position: relative;
+  width: 75px;
+  height: 194px;
+  object-fit: contain;
+  z-index: 2;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+#coffinImg {
+  position: relative;
+  width: 170px;
+  height: 194px;
+  object-fit: contain;
+  z-index: 2;
+  margin-left: 0;
+  flex-shrink: 0;
+}
+
+#remainingTime {
+  margin-top: 10px;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+}

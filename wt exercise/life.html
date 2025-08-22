@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Prediction Result</title>
+  <link rel="stylesheet" href="life.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-section">
+      <div class="image-section">
+        <img id="genderImage" src="" alt="User Gender">
+      </div>
+      <div class="details-section">
+        <h2>User Details</h2>
+        <p><strong>Name:</strong> <span id="resName"></span></p>
+        <p><strong>Year of Birth:</strong> <span id="resBirth"></span></p>
+        <p><strong>Foods:</strong> <span id="resFoods"></span></p>
+        <p><strong>Favorite Food:</strong> <span id="resFavFood"></span></p>
+        <p><strong>Lifestyle:</strong> <span id="resLifestyle"></span></p>
+        <p><strong>Gender:</strong> <span id="resGender"></span></p>
+      </div>
+    </div>
+    <div class="life-section">
+  <button class="btn" onclick="window.location.href='result.html'">View Your Remaining Life Period</button>
+      <div class="life-visual" id="lifeVisual" style="display:none;">
+        <img id="lifePerson" src="" alt="Person">
+        <div style="flex:1; position:relative; height:194px; display:flex; align-items:center; justify-content:center;">
+          <div id="lifeLine" class="line"></div>
+        </div>
+        <img id="coffinImg" src="images/coffin.png" alt="Coffin">
+      </div>
+      <div id="remainingTime"></div>
+    </div>
+  </div>
+  <script src="life.js"></script>
+</body>
+</html>
