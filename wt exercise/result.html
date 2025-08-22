@@ -19,12 +19,20 @@
 
     .container {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       background: rgba(0, 0, 0, 0.85);
-      width: 80%;
-      max-width: 1000px;
+      width: 85%;
+      max-width: 1100px;
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(255,0,0,0.4);
+      padding: 20px;
+    }
+
+    .top-section {
+      display: flex;
+      width: 100%;
     }
 
     .image-section {
@@ -37,7 +45,7 @@
     }
 
     .image-section img {
-      max-width: 300px;
+      max-width: 250px;
     }
 
     .details-section {
@@ -56,25 +64,116 @@
       font-size: 16px;
       color: #ddd;
     }
+
+    .life-section {
+      margin-top: 30px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #cc0000;
+    }
+
+    .line {
+      height: 10px;
+      background: white;
+      border-radius: 5px;
+      transition: width 1s ease;
+      position: relative;
+      min-width: 20px;
+      max-width: 400px;
+    }
+
+    .life-visual {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: 25px;
+      gap: 20px;
+      position: relative;
+      height: 220px;
+    }
+
+    #lifePerson {
+      position: absolute;
+      bottom: 40px;
+      left: 0;
+      transition: left 1s;
+      z-index: 2;
+      max-width: 90px;
+    }
+
+    .death-box {
+      width: 150px;
+      height: 200px;
+      background: #330000;
+      border: 3px solid red;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: red;
+      font-weight: bold;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    #remainingTime {
+      margin-top: 10px;
+      color: #fff;
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Gender Image -->
-    <div class="image-section">
-      <img id="genderImage" src="" alt="User Gender">
+    <!-- Top Section -->
+    <div class="top-section">
+      <!-- Gender Image -->
+      <div class="image-section">
+        <img id="genderImage" src="" alt="User Gender">
+      </div>
+
+      <!-- User Details -->
+      <div class="details-section">
+        <h2>User Details</h2>
+        <p><strong>Name:</strong> <span id="resName"></span></p>
+        <p><strong>Year of Birth:</strong> <span id="resBirth"></span></p>
+        <p><strong>Foods:</strong> <span id="resFoods"></span></p>
+        <p><strong>Favorite Food:</strong> <span id="resFavFood"></span></p>
+        <p><strong>Lifestyle:</strong> <span id="resLifestyle"></span></p>
+        <p><strong>Gender:</strong> <span id="resGender"></span></p>
+      </div>
     </div>
 
-    <!-- User Details -->
-    <div class="details-section">
-      <h2>User Details</h2>
-      <p><strong>Name:</strong> <span id="resName"></span></p>
-      <p><strong>Year of Birth:</strong> <span id="resBirth"></span></p>
-      <p><strong>Foods:</strong> <span id="resFoods"></span></p>
-      <p><strong>Favorite Food:</strong> <span id="resFavFood"></span></p>
-      <p><strong>Lifestyle:</strong> <span id="resLifestyle"></span></p>
-      <p><strong>Gender:</strong> <span id="resGender"></span></p>
+    <!-- Life Prediction Section -->
+    <div class="life-section">
+      <button class="btn" onclick="predictLife()">View Your Remaining Life Period</button>
+      <div class="life-visual" id="lifeVisual" style="display:none; position:relative;">
+        <div style="position:relative; width:420px;">
+          <div id="lifeLine" class="line"></div>
+          <img id="lifePerson" src="" alt="Person">
+        </div>
+        <div class="death-box" id="deathBox">DEATH</div>
+      </div>
+      <div id="remainingTime"></div>
     </div>
   </div>
 
@@ -91,12 +190,84 @@
 
       // Set gender image
       const img = document.getElementById("genderImage");
+      const imgLife = document.getElementById("lifePerson");
       if (data.gender === "Male") {
-        img.src = "images/man.png"; // standing male
+        img.src = "images/man.png"; 
+        imgLife.src = "images/man.png"; 
       } else if (data.gender === "Female") {
-        img.src = "images/female.png"; // standing female
+        img.src = "images/female.png"; 
+        imgLife.src = "images/female.png"; 
       } else {
-        img.src = "https://cdn-icons-png.flaticon.com/512/1077/1077114.png"; // default
+        img.src = "https://cdn-icons-png.flaticon.com/512/1077/1077114.png";
+        imgLife.src = "https://cdn-icons-png.flaticon.com/512/1077/1077114.png";
+      }
+    }
+
+    function predictLife() {
+      const birthYear = parseInt(data.birthyear);
+      const currentYear = new Date().getFullYear();
+      const age = currentYear - birthYear;
+
+      let lifeExpectancy = 85; // base
+
+      // food effect
+      if (data.foods.toLowerCase().includes("junk")) {
+        lifeExpectancy -= 20;
+      } else if (data.foods.toLowerCase().includes("healthy") || data.foods.toLowerCase().includes("fruits")) {
+        lifeExpectancy += 5;
+      }
+
+      // lifestyle effect
+      if (data.lifestyle.toLowerCase().includes("smoke") || data.lifestyle.toLowerCase().includes("drink")) {
+        lifeExpectancy -= 15;
+      } else if (data.lifestyle.toLowerCase().includes("active")) {
+        lifeExpectancy += 5;
+      }
+
+      const remaining = lifeExpectancy - age;
+      const line = document.getElementById("lifeLine");
+      const visual = document.getElementById("lifeVisual");
+      const personImg = document.getElementById("lifePerson");
+      const deathBox = document.getElementById("deathBox");
+      const remainingTime = document.getElementById("remainingTime");
+
+      visual.style.display = "flex";
+
+      // Calculate time left
+      let timeText = "";
+      if (remaining <= 0) {
+        timeText = "No time left";
+      } else {
+        const years = Math.floor(remaining);
+        const months = Math.floor((remaining - years) * 12);
+        const days = Math.floor(((remaining - years) * 12 - months) * 30);
+        timeText = `${years > 0 ? years + " years " : ""}${months > 0 ? months + " months " : ""}${days > 0 ? days + " days" : ""} left`;
+      }
+      remainingTime.textContent = timeText;
+
+      // Timeline and person position
+      const maxWidth = 400;
+      if (remaining <= 0) {
+        line.style.width = "0px";
+        personImg.style.display = "block";
+        personImg.style.opacity = "0.5";
+        personImg.style.left = (420 + 10) + "px"; // inside death box
+        personImg.style.top = "40px";
+        deathBox.appendChild(personImg);
+      } else {
+        // Show line
+        const width = Math.max(20, Math.min(maxWidth, remaining * 5));
+        line.style.width = width + "px";
+        personImg.style.opacity = "1";
+        personImg.style.display = "block";
+        // Move person along the line
+        personImg.style.position = "absolute";
+        personImg.style.left = (width - 45) + "px";
+        personImg.style.top = "0px";
+        // Ensure person is outside death box
+        if (deathBox.contains(personImg)) {
+          visual.querySelector('div').appendChild(personImg);
+        }
       }
     }
   </script>
