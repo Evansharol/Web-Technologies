@@ -1,0 +1,56 @@
+body {
+  background: url('images/bg.webp') center/cover fixed;
+  background-color: #111827; /* fallback color */
+}
+.form-container {
+    background: rgba(31, 41, 55, 0.8);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-field {
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.error-message {
+  display: none;
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.error .error-message {
+  display: block;
+}
+
+.image-select img {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-select input:checked + img {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.section-container {
+  background: #2d3748;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #3b82f6;
+}
